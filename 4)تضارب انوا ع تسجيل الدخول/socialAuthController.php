@@ -16,7 +16,14 @@ class socialAuthController extends Controller
     public function handleCallback()
     {
         $google_user = Socialite::driver('google')->user();
-       
+        // Check if the user already exists in the database
+        $existingUser = User::where('email', $google_user->email)->first();
+
+        if ($existingUser) {
+            // If the user already exists, generate an access token for the user
+            $token = $existingUser->createToken('Token Name')->accessToken;
+            return  $token;
+        } else {
 
             $user = User::where('google_id', $google_user->id)->first();
             if (!$user) {
@@ -33,6 +40,6 @@ class socialAuthController extends Controller
                 Auth::login($user);
                 return $user;
             }
-        
+        }
     }
 }
