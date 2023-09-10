@@ -48,8 +48,8 @@ class ProductController extends Controller
             'About' => $request->About,
             'discount' => $request->discount,
         ]);
-        $product->status = 'published';
-        $product->save();
+        $productCreated->status = 'published';
+        $productCreated->save();
         if ($request->hasFile('images')) {
             $productId = $productCreated->id;
             $files = $request->file("images");
