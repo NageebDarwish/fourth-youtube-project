@@ -23,6 +23,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->numberBetween(70, 200),
             'About' => $this->faker->sentence(),
             'discount' => $this->faker->numberBetween(0, 100),
+            'status' => 'published'
         ];
     }
 }
